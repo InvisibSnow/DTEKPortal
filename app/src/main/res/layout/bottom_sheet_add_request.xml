@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_add_request"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_service_item"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_not_availability_add_service_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_in_available_layout"
+            android:paddingBottom="@dimen/padding_in_available_layout"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/TextViewBottomSheetStyle"
+                android:text="@string/text_not_availability_service_message"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_add_services_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_add_car_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/car_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_car"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_it_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/it_service_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_it_service"
+
+                    tools:visibility="visible"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_room_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/room_service_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_room_service"
+
+                    tools:visibility="visible"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_hr_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/hr_vacation_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_hr_vacation"
+
+                    tools:visibility="visible"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_qr_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/qr_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_qr"
+
+                    tools:visibility="visible"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_bt_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/business_trip_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_business_trip"
+
+                    tools:visibility="visible"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_add_references_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/references_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_references"
+                    />
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_doc_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/scanning_add_request"
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/title_add_doc"
+
+                    tools:visibility="visible"
+                    />
+
+                <LinearLayout
+                    style="@style/DividerItemStyle"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

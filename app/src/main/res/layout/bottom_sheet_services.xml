@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="bottomSheet"
+            type="com.dtek.portal.ui.activity.main.MainActivityVM"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/bottom_sheet_services"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:behavior_hideable="true"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        bottomSheetBehaviorState="@{bottomSheet.bottomSheetBehaviorState}"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_current_choose_item"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_not_availability_service_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_in_available_layout"
+                android:paddingBottom="@dimen/padding_in_available_layout"
+
+                tools:visibility="visible">
+
+                <TextView
+                    style="@style/TextViewBottomSheetStyle"
+                    android:text="@string/text_not_availability_service_message"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_services_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_add_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.CAR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_car"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_car" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_it"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.ITSM_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_it_service"
+                        style="@style/TextViewBottomSheetStyle_2"
+
+                        android:text="@string/title_it_service" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.AHO_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_room_service"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_room_service" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_hr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.HR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_hr_vacation"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_hr_vacation" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_qr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.QR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_qr"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_qr" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_bt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.BTRIPS_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_business_trip"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_business_trip" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_references"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.REFERENCE_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_references"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_references" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_doc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_scanning"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_scanning" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_inventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/nav_inventory"
+                        style="@style/TextViewBottomSheetStyle_2"
+                        android:text="@string/title_inventory" />
+
+                    <LinearLayout style="@style/ServicesDividerItemStyle" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

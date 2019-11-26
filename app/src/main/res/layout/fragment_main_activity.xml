@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainFragment"
+            type="com.dtek.portal.ui.activity.main.MainActivityVM" />
+
+    </data>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/navigation_layout_height"
+            android:fitsSystemWindows="true">
+
+            <include layout="@layout/app_bar_main"
+                bind:mainAppBar="@{mainFragment}"
+                />
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_grey_transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

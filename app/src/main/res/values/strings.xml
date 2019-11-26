@@ -2,5 +2,41 @@
     <string name="app_name">DTEKPortal</string>
     <string name="app_version">v%1$s</string>
 
+    <!-- Загальні меню -->
+    <string name="title_news">НОВИНИ</string>
+    <string name="title_news_dtek">Компанія</string>
+    <string name="title_news_bookmark">Закладки</string>
+    <string name="title_news_company">Підприємства</string>
+    <string name="title_news_dtek_details">Новини компанії</string>
+    <string name="title_news_company_details">Новини підприємств</string>
+    <string name="title_service">Сервіси</string>
+    <string name="title_car">Автотранспорт</string>
+    <string name="title_business_trip">Відрядження</string>
+    <string name="title_references">Замовлення довідок</string>
+    <string name="title_scanning">Документи</string>
+    <string name="title_inventory">Інвентаризація</string>
+    <string name="title_it_service">ІТ-послуги</string>
+    <string name="title_room_service">Обслуговування приміщень</string>
+    <string name="title_hr_vacation">Відпустка</string>
+    <string name="title_qr">QR</string>
+    <string name="title_media">МЕДІА</string>
+    <string name="title_photo">Фотогалерея</string>
+    <string name="title_video">Відео</string>
+    <string name="title_newspaper">Наша газета</string>
+    <string name="title_ukr">Українською</string>
+    <string name="language_ukr">Українська</string>
+    <string name="title_rus">Російською</string>
+    <string name="language_rus">Російська</string>
+
+    <string name="title_add_car">Замовити автомобіль</string>
+    <string name="title_add_it_service">Створити заявку на ІТ-послуги</string>
+    <string name="title_add_hr_vacation">Створити заяву на відпустку</string>
+    <string name="title_add_room_service">Створити заявку на обслуговування приміщень</string>
+    <string name="title_add_qr">Створити заявку за допомогою QR</string>
+    <string name="title_add_business_trip">Створити заяву на відрядження</string>
+    <string name="title_add_references">Створити заявку на довідку</string>
+    <string name="title_add_doc">Створити документ</string>
+
+    <string name="text_not_availability_service_message">Сервіси не доступні</string>
 
 </resources>

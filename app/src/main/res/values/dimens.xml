@@ -5,7 +5,19 @@
     <dimen name="ic_logo_height">@dimen/_40sdp</dimen>
 
     <dimen name="text_size_small">@dimen/_12sdp</dimen>
-
     <dimen name="horizontal_margin">@dimen/_16sdp</dimen>
+
+    <dimen name="m_toolbar_height">@dimen/_56sdp</dimen>
+    <dimen name="ic_logo_toolbar_width">@dimen/_70sdp</dimen>
+    <dimen name="ic_logo_toolbar_height">@dimen/_25sdp</dimen>
+    <dimen name="tv_title_margin_start">@dimen/_20sdp</dimen>
+    <dimen name="tv_title_margin_end">@dimen/_12sdp</dimen>
+    <dimen name="tv_title_size">@dimen/_35sdp</dimen>
+
+    <dimen name="padding_in_available_layout">@dimen/_50sdp</dimen>
+    <dimen name="navigation_layout_height">@dimen/_40sdp</dimen>
+
+
+
 
 </resources>

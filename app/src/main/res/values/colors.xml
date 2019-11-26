@@ -5,4 +5,21 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorGreyTransparent">#d585868a</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="color_toolbar_text">#131313</color>
+    <color name="color_grey_transparent">#80000000</color>
+    <color name="color_current_choose_item">#A8D7E3</color>
+    <color name="color_service_item">#D8D86A</color>
+    <color name="color_light_blue_bg">#E9F6F8</color>
+    <color name="color_grey_bg">#E2E2E2</color>
+    <color name="color_tab_text_redesign">#131313</color>
+    <color name="color_pic_transparent">#63000000</color>
+    <color name="color_poster_grey">#6D6C6C</color>
+    <color name="color_title">#333333</color>
+    <color name="color_progress_bar">#FEDF04</color>
+    <color name="color_comment_layout">#F1F1F1</color>
+    <color name="color_comment_layout_grey">#f8f8f8</color>
+    <color name="color_blue_light">#E9F6F8</color>
+    <color name="color_text_grey">#666666</color>
+    <color name="color_btn_grey">#DDDDDD</color>
 </resources>

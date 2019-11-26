@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dtek.portal.BuildConfig;
 import com.dtek.portal.R;
+import com.dtek.portal.ui.activity.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,12 +36,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startTimerApp(){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startMainActivity();
-            }
-        }, 3500);
+        new Handler().postDelayed(this::startMainActivity, 3500);
     }
 
     private void startMainActivity(){
