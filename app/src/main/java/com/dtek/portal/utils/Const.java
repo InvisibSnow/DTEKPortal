@@ -2,6 +2,12 @@ package com.dtek.portal.utils;
 
 public class Const {
 
+    public static final class HTTP{
+        public static final String API_BASE_URL = "https://mobile.dtek.com/";
+        private static final String BASE_AUTH = "authorization/auth.svc/";
+        public static final String API_AUTH_ACCESS = BASE_AUTH + "checkaccess/";
+    }
+
     public static final class PUSH {
         public static final String DATA_TYPE = "type";
         public static final String JSON_BODY = "jsonBody";

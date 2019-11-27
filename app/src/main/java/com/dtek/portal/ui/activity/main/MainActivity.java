@@ -3,19 +3,20 @@ package com.dtek.portal.ui.activity.main;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.dtek.portal.R;
-
 import com.dtek.portal.databinding.ActivityMainBinding;
-import com.stfalcon.androidmvvmhelper.mvvm.activities.BindingActivity;
+import com.dtek.portal.mvvm.MyBindingActivity;
 
-public class MainActivity extends BindingActivity <ActivityMainBinding, MainActivityVM> {
-
-    private MainActivityVM mainActivityVM;
+public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainActivityVM> {
 
     @Override
-    public MainActivityVM onCreate() {
-        mainActivityVM = new MainActivityVM(this);
-        setTitle("test Title");
-        return mainActivityVM;
+    protected MainActivityVM getVM() {
+        viewModel = new MainActivityVM(this);
+        return viewModel;
+    }
+
+    @Override
+    public void setTitle(){
+        viewModel.setTitle(getString(R.string.title_news));
     }
 
     @Override
@@ -27,9 +28,4 @@ public class MainActivity extends BindingActivity <ActivityMainBinding, MainActi
     public int getLayoutId() {
         return R.layout.activity_main;
     }
-
-    public void setTitle(String title){
-        mainActivityVM.setTitle(title);
-    }
-
 }

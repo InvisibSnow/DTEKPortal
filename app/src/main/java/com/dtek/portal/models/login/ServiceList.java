@@ -1,5 +1,7 @@
 package com.dtek.portal.models.login;
 
+import android.util.Log;
+
 import androidx.databinding.BaseObservable;
 
 import com.google.gson.annotations.Expose;
@@ -7,7 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ServicesList extends BaseObservable {
+
+public class ServiceList extends BaseObservable {
 
     @SerializedName("isValid")
     @Expose
@@ -17,18 +20,23 @@ public class ServicesList extends BaseObservable {
     @Expose
     private List<ServicePortal> services;
 
-    public void setServices(List<ServicePortal> services) {
+    public ServiceList(boolean valid, List<ServicePortal> services) {
+        this.valid = valid;
         this.services = services;
     }
 
     public boolean isValid() {
-        return valid;
+        return !valid;
     }
 
     public boolean getServiceAccess(String serviceName) {
-        for (ServicePortal servicePortal : services) {
-            if (servicePortal.getServiceName().equals(serviceName) && servicePortal.isSuccess()) {
-                return true;
+        if(!valid){
+            return false;
+        } else {
+            for (ServicePortal servicePortal : services) {
+                if (servicePortal.getServiceName().equals(serviceName) && servicePortal.isSuccess()) {
+                    return true;
+                }
             }
         }
         return false;

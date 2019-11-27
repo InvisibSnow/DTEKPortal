@@ -20,7 +20,8 @@ public class MyDialog extends DialogFragment {
         if (getActivity() != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(mString)
-                    .setPositiveButton(android.R.string.ok, (dialog, id) -> { });
+                    .setPositiveButton(android.R.string.ok, (dialog, id) -> { })
+            ;
             return builder.create();
         }
         return null;

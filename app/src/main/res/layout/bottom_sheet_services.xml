@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/padding_in_available_layout"
                 android:paddingBottom="@dimen/padding_in_available_layout"
-
+                android:visibility="@{bottomSheet.serviceList.valid ? View.VISIBLE : View.GONE, default=gone }"
                 tools:visibility="visible">
 
                 <TextView
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.CAR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.CAR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.ITSM_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.ITSM_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.AHO_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.AHO_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.HR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.HR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.QR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.QR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.BTRIPS_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.BTRIPS_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.servicesList.getServiceAccess(bottomSheet.REFERENCE_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.REFERENCE_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
                     tools:visibility="visible">
 
                     <TextView
