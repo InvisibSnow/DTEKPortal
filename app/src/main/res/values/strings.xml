@@ -2,6 +2,17 @@
     <string name="app_name">DTEKPortal</string>
     <string name="app_version">v%1$s</string>
 
+    <!-- Логін -->
+    <string name="text_dialog_login">Введіть логін</string>
+    <string name="text_hint_login">Логін</string>
+    <string name="text_dialog_sms">Введіть код доступа</string>
+    <string name="text_hint_sms">Код доступа</string>
+    <string name="btn_sms">Запросити код доступа</string>
+    <string name="btn_enter">Вхід</string>
+    <string name="btn_enter_without_registration">Вхід без регістрації</string>
+    <string name="text_sms_code">Sms-код надходить тільки на корпоративний номер Рекомендуемо ознайомитися з поширенними питаннями у правому верхньому куті</string>
+    <string name="text_menu_help">FAQ</string>
+
     <!-- Загальні меню -->
     <string name="title_news">НОВИНИ</string>
     <string name="title_news_dtek">Компанія</string>

@@ -22,4 +22,14 @@
     <color name="color_blue_light">#E9F6F8</color>
     <color name="color_text_grey">#666666</color>
     <color name="color_btn_grey">#DDDDDD</color>
+
+    <color name="color_background_white">#E8E9E8</color>
+    <color name="color_tab_background">#85868A</color>
+    <color name="color_tab_background_select">#FFE300</color>
+    <color name="color_tab_text">#E8E9E8</color>
+    <color name="color_news_detail_title">#85868A</color>
+    <color name="color_news_detail_text">#000000</color>
+    <color name="color_news_detail_background">#FFFFFF</color>
+    <color name="color_text_date">#AAADC4</color>
+    <color name="color_link_text">#1f2a7c</color>
 </resources>

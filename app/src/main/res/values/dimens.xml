@@ -4,7 +4,8 @@
     <dimen name="ic_logo_width">@dimen/_120sdp</dimen>
     <dimen name="ic_logo_height">@dimen/_40sdp</dimen>
 
-    <dimen name="text_size_small">@dimen/_12sdp</dimen>
+    <dimen name="text_size_normal">@dimen/_18sdp</dimen>
+    <dimen name="text_size_small">@dimen/_10sdp</dimen>
     <dimen name="horizontal_margin">@dimen/_16sdp</dimen>
 
     <dimen name="m_toolbar_height">@dimen/_56sdp</dimen>
@@ -16,6 +17,9 @@
 
     <dimen name="padding_in_available_layout">@dimen/_50sdp</dimen>
     <dimen name="navigation_layout_height">@dimen/_40sdp</dimen>
+
+    <dimen name="login_activity_margin">@dimen/_16sdp</dimen>
+    <dimen name="login_activity_margin_vertical">@dimen/_20sdp</dimen>
 
 
 

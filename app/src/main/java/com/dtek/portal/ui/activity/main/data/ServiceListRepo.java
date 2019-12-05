@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.dtek.portal.api.RestManager;
 import com.dtek.portal.models.login.ServiceList;
-import com.dtek.portal.utils.IBaseOnFinishListener;
+import com.dtek.portal.api.IOnErrorListener;
 import com.dtek.portal.utils.PreferenceUtils;
 
 import retrofit2.Call;
@@ -20,7 +20,7 @@ public class ServiceListRepo implements IServiceListRepo {
     private Call serviceListCall;
 
     @Override
-    public void getServiceList(OnFinishedListener onFinishedListener, IBaseOnFinishListener iBaseOnFinishListener) {
+    public void getServiceList(OnFinishedListener onFinishedListener, IOnErrorListener iBaseOnFinishListener) {
 
         serviceListCall = RestManager.getApi()
                 .getServices(API_AUTH_ACCESS + PreferenceUtils.getToken());

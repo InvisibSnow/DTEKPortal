@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.dtek.portal.utils.IBaseOnFinishListener;
+import com.dtek.portal.api.IOnErrorListener;
 import com.stfalcon.androidmvvmhelper.mvvm.activities.ActivityViewModel;
 
 import static com.dtek.portal.mvvm.MyBindingActivity.ERROR_TOKEN_ACTION;
 
-public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityViewModel<A> implements IBaseOnFinishListener {
+public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityViewModel<A> implements IOnErrorListener {
 
-    private MutableLiveData<String> data;
+    protected MutableLiveData<String> data;
     private MutableLiveData<Throwable> errorData;
     private MutableLiveData<String> errorServiceData;
 
@@ -21,7 +21,7 @@ public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityVi
         super(activity);
     }
 
-    protected IBaseOnFinishListener getBaseListener(){
+    protected IOnErrorListener getBaseListener(){
         return this;
     }
 
@@ -43,15 +43,20 @@ public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityVi
     @Override
     public void onFailure(String error) {
         errorServiceData.postValue(error);
+        updateView();
     }
 
     @Override
     public void onFailure(Throwable throwable) {
         errorData.postValue(throwable);
+        updateView();
     }
 
     @Override
     public void errorToken() {
         data.postValue(ERROR_TOKEN_ACTION);
+        updateView();
     }
+
+    public void updateView(){}
 }

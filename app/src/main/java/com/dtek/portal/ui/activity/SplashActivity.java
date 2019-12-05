@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.dtek.portal.BuildConfig;
 import com.dtek.portal.R;
+import com.dtek.portal.ui.activity.login.LoginActivity;
 import com.dtek.portal.ui.activity.main.MainActivity;
 
 import butterknife.BindView;
@@ -40,7 +42,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+//        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         checkIntentData(getIntent(),intent);
         startActivity(intent);
         finish();

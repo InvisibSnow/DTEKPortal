@@ -12,7 +12,7 @@ public class ServicePortal {
     @Expose
     private boolean success;
 
-    public ServicePortal(String serviceName, boolean success) {
+    public ServicePortal(String serviceName, boolean success) { //todo Constructor for test
         this.serviceName = serviceName;
         this.success = success;
     }

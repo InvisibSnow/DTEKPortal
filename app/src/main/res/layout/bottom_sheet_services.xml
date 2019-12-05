@@ -18,7 +18,7 @@
 
         app:behavior_hideable="true"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        bottomSheetBehaviorState="@{bottomSheet.bottomSheetBehaviorState}"
+        bottomSheetBehaviorState="@{bottomSheet.serviceListBottomSheetBehaviorState}"
         >
 
 
@@ -54,7 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.CAR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.CAR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.CAR_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -71,7 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.ITSM_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.ITSM_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.ITSM_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -89,7 +91,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.AHO_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.AHO_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.AHO_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -106,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.HR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.HR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.HR_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -123,7 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.QR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.QR_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.QR_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -140,7 +145,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.BTRIPS_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.BTRIPS_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.BTRIPS_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView
@@ -157,7 +163,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.REFERENCE_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:visibility="@{bottomSheet.serviceList.getServiceAccess(bottomSheet.constServices.REFERENCE_SERVICE) ? View.VISIBLE : View.GONE, default=gone }"
+                    android:onClick="@{()->bottomSheet.serviceSelected(bottomSheet.constServices.REFERENCE_SERVICE_ID)}"
                     tools:visibility="visible">
 
                     <TextView

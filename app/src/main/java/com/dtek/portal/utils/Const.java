@@ -8,6 +8,15 @@ public class Const {
         public static final String API_AUTH_ACCESS = BASE_AUTH + "checkaccess/";
     }
 
+    public static final class Login{
+        public static final String BASE_AUTH = "authorization/auth.svc/";
+        public static final String API_AUTH_SMS = BASE_AUTH + "getsms/";
+        public static final String API_AUTH_TOKEN = BASE_AUTH + "checksmscode/";
+        public static final String API_AUTH_ACCESS = BASE_AUTH + "checkaccess/";
+        public static final String API_AUTH_TEXT = BASE_AUTH + "Texts";
+        public static final String API_AUTHORITY = "Authority";
+    }
+
     public static final class PUSH {
         public static final String DATA_TYPE = "type";
         public static final String JSON_BODY = "jsonBody";

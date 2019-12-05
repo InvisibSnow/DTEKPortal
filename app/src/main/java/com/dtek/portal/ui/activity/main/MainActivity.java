@@ -1,10 +1,13 @@
 package com.dtek.portal.ui.activity.main;
 
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.lifecycle.LiveData;
 
 import com.dtek.portal.R;
 import com.dtek.portal.databinding.ActivityMainBinding;
 import com.dtek.portal.mvvm.MyBindingActivity;
+
+import static com.dtek.portal.utils.SwitchFragmentHelper.switchFragment;
 
 public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainActivityVM> {
 
@@ -15,8 +18,20 @@ public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainAct
     }
 
     @Override
-    public void setTitle(){
-        viewModel.setTitle(getString(R.string.title_news));
+    public void initListener() {
+        super.initListener();
+
+        LiveData<Integer> data = viewModel.getServiceData();
+        data.observe(this, this::changeFragment);
+    }
+
+    private void changeFragment(Integer serviceID){
+        switchFragment(getSupportFragmentManager(), serviceID);
+    }
+
+    @Override
+    public void setTitle(String title){
+        viewModel.setTitle(title);
     }
 
     @Override
@@ -28,4 +43,5 @@ public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainAct
     public int getLayoutId() {
         return R.layout.activity_main;
     }
+
 }

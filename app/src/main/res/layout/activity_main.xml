@@ -27,7 +27,9 @@
                 bind:bottomSheet="@{viewModel}"
                 />
 
-            <include layout="@layout/bottom_sheet_add_request" />
+            <include layout="@layout/bottom_sheet_add_request"
+                bind:bottomSheet="@{viewModel}"
+                />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

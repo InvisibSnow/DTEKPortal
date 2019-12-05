@@ -66,4 +66,6 @@ public class RestManager {
                 .setLevel(BuildConfig.DEBUG ?
                         HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
     }
+
+
 }

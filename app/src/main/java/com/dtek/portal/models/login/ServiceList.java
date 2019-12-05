@@ -1,7 +1,5 @@
 package com.dtek.portal.models.login;
 
-import android.util.Log;
-
 import androidx.databinding.BaseObservable;
 
 import com.google.gson.annotations.Expose;
