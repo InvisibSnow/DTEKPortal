@@ -1,6 +1,8 @@
 package com.dtek.portal.ui.activity.main;
 
 import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -12,6 +14,7 @@ import com.dtek.portal.mvvm.MyActivityViewModel;
 import com.dtek.portal.ui.activity.main.data.IServiceListRepo;
 import com.dtek.portal.ui.activity.main.data.ServiceListRepo;
 import com.dtek.portal.utils.ConstServices;
+import com.dtek.portal.utils.PreferenceUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 public class MainActivityVM extends MyActivityViewModel<MainActivity> implements IServiceListRepo.OnFinishedListener {
@@ -24,8 +27,8 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
 
     public final ObservableField<String> title = new ObservableField<>();
     public final ObservableField<ServiceList> serviceList = new ObservableField<>();
-    public final ObservableInt serviceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_EXPANDED);
-    public final ObservableInt addServiceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_EXPANDED);
+    public final ObservableInt serviceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
+    public final ObservableInt addServiceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
 
     public MainActivityVM(MainActivity activity) {
         super(activity);
@@ -33,12 +36,12 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         constServices = new ConstServices();
     }
 
-    void setTitle(String title){
+    void setTitle(String title) {
         this.title.set(title);
     }
 
-    private void getServiceList(){
-        if(serviceList.get()==null){
+    private void getServiceList() {
+        if (serviceList.get() == null) {
             iServiceListRepo.getServiceList(this, getBaseListener());
         }
     }
@@ -52,6 +55,21 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     public static void setState(View v, int bottomSheetBehaviorState) {
         BottomSheetBehavior<View> viewBottomSheetBehavior = BottomSheetBehavior.from(v);
         viewBottomSheetBehavior.setState(bottomSheetBehaviorState);
+
+        viewBottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    viewBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                } else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+//                    bottomSheetAddRequestView.setVisibility(View.GONE); //при вызове клавиатуры в фрагментах вылазит BottomSheetBehavior, как на него повлият хз, так что такой вот костыль
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
     }
 
     @Override
@@ -59,12 +77,50 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         this.serviceList.set(serviceList);
     }
 
-    public void serviceSelected(int serviceID){
+    public void serviceSelected(int serviceID) {
         serviceData.postValue(serviceID);
     }
 
     public LiveData<Integer> getServiceData() {
         serviceData = new MutableLiveData<>();
         return serviceData;
+    }
+
+    public void onClickServicesAdd() {
+        if(isLogin()) {
+            servicesNavigationHide();
+            showHideBSB(addServiceListBottomSheetBehaviorState);
+        } else {
+            errorToken();
+        }
+    }
+
+    public void onClickServices() {
+        if(isLogin()) {
+            addServicesNavigationHide();
+            showHideBSB(serviceListBottomSheetBehaviorState);
+        } else {
+            errorToken();
+        }
+    }
+
+    private void servicesNavigationHide() {
+        serviceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private void addServicesNavigationHide() {
+        addServiceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private void showHideBSB(ObservableInt observableInt) {
+        if (observableInt.get() == BottomSheetBehavior.STATE_HIDDEN) {
+            observableInt.set(BottomSheetBehavior.STATE_EXPANDED);
+        } else {
+            observableInt.set(BottomSheetBehavior.STATE_HIDDEN);
+        }
+    }
+
+    public boolean isLogin(){
+        return !PreferenceUtils.getLogin().equals("");
     }
 }

@@ -38,6 +38,7 @@ public class LoginActivity extends MyBindingActivity<ActivityLoginBinding, Login
     private void loginAction(String action) {
         if(action.equals(LOGIN_ACTION)){
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 

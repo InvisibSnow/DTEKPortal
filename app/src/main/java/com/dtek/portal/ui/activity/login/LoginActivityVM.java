@@ -167,6 +167,7 @@ public class LoginActivityVM extends MyActivityViewModel<LoginActivity>  {
     class InSign implements IOnFinishLoadListener<Login> {
 
         void sign(){
+            progress.set(true);
             iLoginRepo.sign(this, getBaseListener(), signCode);
             hideKeyboard();
         }

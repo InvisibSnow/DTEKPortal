@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.LiveData;
 
 import com.dtek.portal.ui.activity.SplashActivity;
+import com.dtek.portal.ui.activity.login.LoginActivity;
 import com.dtek.portal.utils.ApiErrors;
 import com.stfalcon.androidmvvmhelper.mvvm.activities.BindingActivity;
 
@@ -60,9 +61,9 @@ public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityV
     }
 
     public void errorToken() {
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        //todo create Exit
+        finish();
     }
 
     private void errorAction(Throwable throwable) {

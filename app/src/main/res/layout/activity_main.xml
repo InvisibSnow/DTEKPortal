@@ -33,7 +33,9 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <include layout="@layout/bottom_navigation_layout" />
+        <include layout="@layout/bottom_navigation_layout"
+            bind:navigation="@{viewModel}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

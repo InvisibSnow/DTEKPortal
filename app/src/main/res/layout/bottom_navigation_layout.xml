@@ -1,131 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_navigation_layout"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/navigation_layout_height"
-    android:background="@color/colorWhite"
-    app:layout_constraintBottom_toBottomOf="parent"
-    >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_news"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@color/color_light_blue_bg"
+<layout>
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/nav_media"
-        app:layout_constraintHorizontal_weight="3"
+    <data>
+        <variable
+            name="navigation"
+            type="com.dtek.portal.ui.activity.main.MainActivityVM" />
 
-        android:clickable="true"
-        android:focusable="true">
+        <import type="android.view.View" />
+    </data>
 
-        <TextView
-            style="@style/TextViewNavigationStyle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_layout_height"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-            android:text="@string/title_news"
-            />
-        <LinearLayout
-            android:layout_width="1dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nav_news"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/color_current_choose_item"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            android:background="@color/color_light_blue_bg"
+
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintRight_toLeftOf="@+id/nav_media"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/TextViewNavigationStyle"
+                android:text="@string/title_news"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color_current_choose_item"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_media"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@color/color_light_blue_bg"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/nav_news"
-        app:layout_constraintRight_toLeftOf="@+id/nav_services"
-        app:layout_constraintHorizontal_weight="3"
-
-        android:clickable="true"
-        android:focusable="true"
-        >
-
-        <TextView
-            style="@style/TextViewNavigationStyle"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            android:text="@string/title_media"
-            />
-
-        <LinearLayout
-            android:layout_width="1dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nav_media"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/color_current_choose_item"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@color/color_light_blue_bg"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_services"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@color/color_light_blue_bg"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toRightOf="@+id/nav_news"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/nav_media"
-        app:layout_constraintRight_toLeftOf="@+id/nav_add"
-        app:layout_constraintHorizontal_weight="3"
-        >
+            app:layout_constraintRight_toLeftOf="@+id/nav_services"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/TextViewNavigationStyle"
+            <TextView
+                style="@style/TextViewNavigationStyle"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/title_media"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color_current_choose_item"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nav_services"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@{navigation.isLogin ? @color/color_light_blue_bg : @color/color_grey_bg}"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toRightOf="@+id/nav_media"
+            app:layout_constraintRight_toLeftOf="@+id/nav_add"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:text="@string/title_service"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:onClick="@{() -> navigation.onClickServices()}"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_add"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+            >
 
-        android:background="@color/color_service_item"
+            <TextView
+                style="@style/TextViewNavigationStyle"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/nav_services"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_weight="2"
-        >
+                android:text="@string/title_service"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_plus"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nav_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:background="@{navigation.isLogin ? @color/color_service_item : @color/color_grey_bg}"
+
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintLeft_toRightOf="@+id/nav_services"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            />
+            android:onClick="@{() -> navigation.onClickServicesAdd()}"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_plus"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
