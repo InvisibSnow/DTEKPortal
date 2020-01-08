@@ -1,6 +1,7 @@
 package com.dtek.portal.ui.fragment.news;
 
 import com.dtek.portal.R;
+import com.dtek.portal.ui.activity.main.MainActivity;
 import com.dtek.portal.ui.adapter.BasePagerAdapter;
 import com.dtek.portal.ui.fragment.BaseTabFragment;
 
@@ -14,12 +15,15 @@ public class TabNewsFragment extends BaseTabFragment {
 
     @Override
     protected void initFragments() {
-
     }
 
     @Override
     protected void setupViewPager() {
        if(!isAdded()) return;
+
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setTitle(getString(R.string.title_news));
+        }
 
         BasePagerAdapter basePagerAdapter = new BasePagerAdapter(getChildFragmentManager(), 1);
         basePagerAdapter.addFragment(newsDtekListFragment, getString(R.string.title_news_dtek));

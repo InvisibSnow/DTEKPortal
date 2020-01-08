@@ -4,11 +4,13 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.dtek.portal.api.IOnFinishLoadListener;
 import com.dtek.portal.models.login.ServiceList;
 import com.dtek.portal.mvvm.MyActivityViewModel;
 import com.dtek.portal.ui.activity.main.data.IServiceListRepo;
@@ -17,18 +19,18 @@ import com.dtek.portal.utils.ConstServices;
 import com.dtek.portal.utils.PreferenceUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-public class MainActivityVM extends MyActivityViewModel<MainActivity> implements IServiceListRepo.OnFinishedListener {
+public class MainActivityVM extends MyActivityViewModel<MainActivity> implements IOnFinishLoadListener<ServiceList> {
 
     public ConstServices constServices;
-
     private IServiceListRepo iServiceListRepo;
-
     private MutableLiveData<Integer> serviceData;
 
     public final ObservableField<String> title = new ObservableField<>();
     public final ObservableField<ServiceList> serviceList = new ObservableField<>();
     public final ObservableInt serviceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
     public final ObservableInt addServiceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
+    public final ObservableBoolean mBackground = new ObservableBoolean();
+    public final ObservableBoolean mBackgroundColor = new ObservableBoolean();
 
     public MainActivityVM(MainActivity activity) {
         super(activity);
@@ -41,7 +43,7 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     }
 
     private void getServiceList() {
-        if (serviceList.get() == null) {
+        if (serviceList.get() == null && !PreferenceUtils.getToken().isEmpty()) {
             iServiceListRepo.getServiceList(this, getBaseListener());
         }
     }
@@ -49,6 +51,13 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     @Override
     public void onResume() {
         getServiceList();
+        initCurrentFragment();
+    }
+
+    private void initCurrentFragment() {
+        if (serviceData.getValue() == null) {
+            serviceSelected(ConstServices.NEWS_ID);
+        }
     }
 
     @BindingAdapter("bottomSheetBehaviorState")
@@ -73,12 +82,22 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     }
 
     @Override
-    public void onFinishedServiceListLoad(ServiceList serviceList) {
-        this.serviceList.set(serviceList);
+    public void onFinishedLoad(ServiceList data) {
+        if (data.getServices() == null) {
+            errorToken();
+        } else {
+            this.serviceList.set(data);
+        }
     }
 
     public void serviceSelected(int serviceID) {
-        serviceData.postValue(serviceID);
+        if (serviceData.getValue() != null) {
+            if (serviceData.getValue() != serviceID) {
+                serviceData.postValue(serviceID);
+            }
+        } else {
+            serviceData.postValue(serviceID);
+        }
     }
 
     public LiveData<Integer> getServiceData() {
@@ -87,7 +106,7 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     }
 
     public void onClickServicesAdd() {
-        if(isLogin()) {
+        if (isLogin()) {
             servicesNavigationHide();
             showHideBSB(addServiceListBottomSheetBehaviorState);
         } else {
@@ -96,7 +115,7 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     }
 
     public void onClickServices() {
-        if(isLogin()) {
+        if (isLogin()) {
             addServicesNavigationHide();
             showHideBSB(serviceListBottomSheetBehaviorState);
         } else {
@@ -115,12 +134,20 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     private void showHideBSB(ObservableInt observableInt) {
         if (observableInt.get() == BottomSheetBehavior.STATE_HIDDEN) {
             observableInt.set(BottomSheetBehavior.STATE_EXPANDED);
+            mBackground.set(true);
         } else {
             observableInt.set(BottomSheetBehavior.STATE_HIDDEN);
+            mBackground.set(false);
         }
     }
 
-    public boolean isLogin(){
-        return !PreferenceUtils.getLogin().equals("");
+    public boolean isLogin() {
+        return !PreferenceUtils.getToken().equals("");
+    }
+
+    public void mBackGroundClicked() {
+        servicesNavigationHide();
+        addServicesNavigationHide();
+        mBackground.set(false);
     }
 }

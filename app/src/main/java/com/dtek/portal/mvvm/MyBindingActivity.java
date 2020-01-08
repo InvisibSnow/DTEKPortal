@@ -3,16 +3,14 @@ package com.dtek.portal.mvvm;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.LiveData;
 
-import com.dtek.portal.ui.activity.SplashActivity;
 import com.dtek.portal.ui.activity.login.LoginActivity;
 import com.dtek.portal.utils.ApiErrors;
+import com.dtek.portal.utils.PreferenceUtils;
 import com.stfalcon.androidmvvmhelper.mvvm.activities.BindingActivity;
 
 import java.util.Objects;
@@ -61,6 +59,7 @@ public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityV
     }
 
     public void errorToken() {
+        PreferenceUtils.saveToken("");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

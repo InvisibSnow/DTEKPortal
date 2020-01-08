@@ -32,9 +32,12 @@
             app:layout_constraintRight_toLeftOf="@+id/nav_media"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                style="@style/TextViewNavigationStyle"
-                android:text="@string/title_news"
+            <ToggleButton
+                style="@style/MyToggleButtonStyle"
+                android:textOff="@string/title_news"
+                android:textOn="@string/title_news"
+                android:background="@color/color_light_blue_bg"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +89,7 @@
             android:id="@+id/nav_services"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@{navigation.mBackgroundColor ? @color/color_light_blue_bg : @color/color_current_choose_item, default=@color/color_grey_bg}"
+            android:background="@{navigation.isLogin ? @color/color_light_blue_bg : @color/color_grey_bg}"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@+id/nav_media"
             app:layout_constraintRight_toLeftOf="@+id/nav_add"

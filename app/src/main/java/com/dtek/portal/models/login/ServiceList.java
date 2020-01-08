@@ -27,6 +27,10 @@ public class ServiceList extends BaseObservable {
         return !valid;
     }
 
+    public List<ServicePortal> getServices() {
+        return services;
+    }
+
     public boolean getServiceAccess(String serviceName) {
         if(!valid){
             return false;

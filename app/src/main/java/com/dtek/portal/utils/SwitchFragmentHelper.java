@@ -22,6 +22,9 @@ public class SwitchFragmentHelper {
 
     private static Fragment getFragment(Integer serviceID){
         switch (serviceID){
+            case ConstServices.NEWS_ID:
+                return new TabNewsFragment();
+            case ConstServices.MEDIA_ID:
             case ConstServices.CAR_SERVICE_ID:
             case ConstServices.AHO_SERVICE_ID:
             case ConstServices.HR_SERVICE_ID:
