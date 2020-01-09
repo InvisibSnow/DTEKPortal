@@ -10,6 +10,7 @@ import androidx.databinding.ObservableInt;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.dtek.portal.R;
 import com.dtek.portal.api.IOnFinishLoadListener;
 import com.dtek.portal.models.login.ServiceList;
 import com.dtek.portal.mvvm.MyActivityViewModel;
@@ -30,22 +31,14 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     public final ObservableInt serviceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
     public final ObservableInt addServiceListBottomSheetBehaviorState = new ObservableInt(BottomSheetBehavior.STATE_HIDDEN);
     public final ObservableBoolean mBackground = new ObservableBoolean();
-    public final ObservableBoolean mBackgroundColor = new ObservableBoolean();
+    public final ObservableBoolean isNewsChecked = new ObservableBoolean();
+    public final ObservableBoolean isMediaChecked = new ObservableBoolean();
+    public final ObservableBoolean isServicesChecked = new ObservableBoolean();
 
     public MainActivityVM(MainActivity activity) {
         super(activity);
         iServiceListRepo = new ServiceListRepo();
         constServices = new ConstServices();
-    }
-
-    void setTitle(String title) {
-        this.title.set(title);
-    }
-
-    private void getServiceList() {
-        if (serviceList.get() == null && !PreferenceUtils.getToken().isEmpty()) {
-            iServiceListRepo.getServiceList(this, getBaseListener());
-        }
     }
 
     @Override
@@ -57,7 +50,88 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     private void initCurrentFragment() {
         if (serviceData.getValue() == null) {
             serviceSelected(ConstServices.NEWS_ID);
+            isNewsChecked.set(true);
         }
+    }
+
+    @Override
+    public void onFinishedLoad(ServiceList data) {
+        if (data.getServices() == null) {
+            errorToken();
+        } else {
+            this.serviceList.set(data);
+        }
+    }
+
+    public void onClickedNews(){
+        serviceSelected(ConstServices.NEWS_ID);
+        disableAllCheckedBg();
+        isNewsChecked.set(true);
+    }
+
+    public void onClickedMedia(){
+        serviceSelected(ConstServices.MEDIA_ID);
+        disableAllCheckedBg();
+        isMediaChecked.set(true);
+    }
+
+    public void onClickServicesAdd() {
+        if (isLogin()) {
+            servicesNavigationHide();
+            showHideBSB(addServiceListBottomSheetBehaviorState);
+        } else {
+            errorToken();
+        }
+    }
+
+    public void onClickServices() {
+        if (isLogin()) {
+            addServicesNavigationHide();
+            disableAllCheckedBg();
+            isServicesChecked.set(true);
+            showHideBSB(serviceListBottomSheetBehaviorState);
+        } else {
+            errorToken();
+        }
+    }
+
+    public void mBackGroundClicked() {
+        servicesNavigationHide();
+        addServicesNavigationHide();
+        mBackground.set(false);
+    }
+
+    public void serviceSelected(int serviceID) {
+        if (serviceData.getValue() != null) {
+            if (serviceData.getValue() != serviceID) {
+                serviceData.postValue(serviceID);
+            }
+        } else {
+            serviceData.postValue(serviceID);
+        }
+    }
+
+    private void servicesNavigationHide() {
+        serviceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private void addServicesNavigationHide() {
+        addServiceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private void showHideBSB(ObservableInt observableInt) {
+        if (observableInt.get() == BottomSheetBehavior.STATE_HIDDEN) {
+            observableInt.set(BottomSheetBehavior.STATE_EXPANDED);
+            mBackground.set(true);
+        } else {
+            observableInt.set(BottomSheetBehavior.STATE_HIDDEN);
+            mBackground.set(false);
+            setCurrentChecked();
+        }
+    }
+
+    public boolean isLogin() {
+        return !PreferenceUtils.getToken().equals("");
     }
 
     @BindingAdapter("bottomSheetBehaviorState")
@@ -81,73 +155,48 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         });
     }
 
-    @Override
-    public void onFinishedLoad(ServiceList data) {
-        if (data.getServices() == null) {
-            errorToken();
+    @BindingAdapter("myColorAttr")
+    public static void bindColorAttr(View view, boolean value) {
+        if(PreferenceUtils.getToken().equals("")){
+            view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_grey_bg));
+        } else if (value){
+            view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_current_choose_item));
         } else {
-            this.serviceList.set(data);
+            view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_light_blue_bg));
         }
     }
 
-    public void serviceSelected(int serviceID) {
-        if (serviceData.getValue() != null) {
-            if (serviceData.getValue() != serviceID) {
-                serviceData.postValue(serviceID);
+    private void disableAllCheckedBg(){
+        isNewsChecked.set(false);
+        isMediaChecked.set(false);
+        isServicesChecked.set(false);
+    }
+
+    private void setCurrentChecked(){
+        disableAllCheckedBg();
+        if(serviceData.getValue() != null) {
+            if (serviceData.getValue() == ConstServices.NEWS_ID) {
+                isNewsChecked.set(true);
+            } else if (serviceData.getValue() == ConstServices.MEDIA_ID) {
+                isMediaChecked.set(true);
+            } else {
+                isServicesChecked.set(true);
             }
-        } else {
-            serviceData.postValue(serviceID);
+        }
+    }
+
+    void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    private void getServiceList() {
+        if (serviceList.get() == null && !PreferenceUtils.getToken().isEmpty()) {
+            iServiceListRepo.getServiceList(this, getBaseListener());
         }
     }
 
     public LiveData<Integer> getServiceData() {
         serviceData = new MutableLiveData<>();
         return serviceData;
-    }
-
-    public void onClickServicesAdd() {
-        if (isLogin()) {
-            servicesNavigationHide();
-            showHideBSB(addServiceListBottomSheetBehaviorState);
-        } else {
-            errorToken();
-        }
-    }
-
-    public void onClickServices() {
-        if (isLogin()) {
-            addServicesNavigationHide();
-            showHideBSB(serviceListBottomSheetBehaviorState);
-        } else {
-            errorToken();
-        }
-    }
-
-    private void servicesNavigationHide() {
-        serviceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
-    }
-
-    private void addServicesNavigationHide() {
-        addServiceListBottomSheetBehaviorState.set(BottomSheetBehavior.STATE_HIDDEN);
-    }
-
-    private void showHideBSB(ObservableInt observableInt) {
-        if (observableInt.get() == BottomSheetBehavior.STATE_HIDDEN) {
-            observableInt.set(BottomSheetBehavior.STATE_EXPANDED);
-            mBackground.set(true);
-        } else {
-            observableInt.set(BottomSheetBehavior.STATE_HIDDEN);
-            mBackground.set(false);
-        }
-    }
-
-    public boolean isLogin() {
-        return !PreferenceUtils.getToken().equals("");
-    }
-
-    public void mBackGroundClicked() {
-        servicesNavigationHide();
-        addServicesNavigationHide();
-        mBackground.set(false);
     }
 }

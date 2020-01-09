@@ -22,15 +22,16 @@
             android:id="@+id/nav_news"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/color_light_blue_bg"
+            android:background="@{navigation.isNewsChecked ? @color/color_current_choose_item: @color/color_light_blue_bg }"
 
-            android:clickable="true"
-            android:focusable="true"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toLeftOf="parent"
 
             app:layout_constraintRight_toLeftOf="@+id/nav_media"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:onClick="@{() -> navigation.onClickedNews()}"
+            >
 
             <TextView
                 style="@style/TextViewNavigationStyle"
@@ -55,15 +56,16 @@
             android:id="@+id/nav_media"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/color_light_blue_bg"
+            android:background="@{navigation.isMediaChecked ?  @color/color_current_choose_item: @color/color_light_blue_bg }"
 
-            android:clickable="true"
-            android:focusable="true"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@+id/nav_news"
 
             app:layout_constraintRight_toLeftOf="@+id/nav_services"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:onClick="@{() -> navigation.onClickedMedia()}"
+            >
 
             <TextView
                 style="@style/TextViewNavigationStyle"
@@ -86,13 +88,13 @@
             android:id="@+id/nav_services"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@{navigation.mBackgroundColor ? @color/color_light_blue_bg : @color/color_current_choose_item, default=@color/color_grey_bg}"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@+id/nav_media"
             app:layout_constraintRight_toLeftOf="@+id/nav_add"
             app:layout_constraintTop_toTopOf="parent"
 
             android:onClick="@{() -> navigation.onClickServices()}"
+            app:myColorAttr="@{navigation.isServicesChecked}"
 
             >
 
