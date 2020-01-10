@@ -1,6 +1,6 @@
 package com.dtek.portal.mvvm;
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.inputmethod.InputMethodManager;
@@ -11,13 +11,11 @@ import androidx.lifecycle.LiveData;
 import com.dtek.portal.ui.activity.login.LoginActivity;
 import com.dtek.portal.utils.ApiErrors;
 import com.dtek.portal.utils.PreferenceUtils;
-import com.stfalcon.androidmvvmhelper.mvvm.activities.BindingActivity;
+import com.stfalcon.androidmvvmhelper.mvvm.fragments.BindingFragment;
 
 import java.util.Objects;
 
-
-@SuppressLint("Registered")
-public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityViewModel> extends BindingActivity<B, VM> {
+public class MyBindingFragment<VM extends MyFragmentViewModel, B extends ViewDataBinding> extends BindingFragment<VM, B> {
 
     public static final String ERROR_TOKEN_ACTION = "error_token";
     public static final String SHOW_KEYBOARD_ACTION = "show_keyboard";
@@ -26,10 +24,9 @@ public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityV
     protected VM viewModel;
 
     @Override
-    public VM onCreate() {
+    protected VM onCreateViewModel(B b) {
         viewModel = getVM();
         initListener();
-
         return viewModel;
     }
 
@@ -59,25 +56,40 @@ public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityV
     }
 
     public void errorToken() {
-        PreferenceUtils.saveToken("");
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        if(getActivity() != null) {
+            PreferenceUtils.saveToken("");
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
     }
 
     private void errorAction(Throwable throwable) {
-        ApiErrors.showError(throwable, getSupportFragmentManager());
+        if (getActivity() != null) {
+            ApiErrors.showError(throwable, getActivity().getSupportFragmentManager());
+        }
     }
 
     private void errorAction(String error) {
-        ApiErrors.showError(error, getSupportFragmentManager());
+        if (getActivity() != null) {
+            ApiErrors.showError(error, getActivity().getSupportFragmentManager());
+        }
     }
 
-//    protected void setTitle(String title) {
-//    }
+    public void showKeyBoard() {
+        if(getActivity() != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        }
+    }
 
-    protected VM getVM() {
-        return null;
+    public void hideKeyBoard() {
+        if(getActivity() != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(Objects.requireNonNull(getActivity().getCurrentFocus()).getWindowToken(), 0);
+            }
+        }
     }
 
     @Override
@@ -90,16 +102,7 @@ public class MyBindingActivity<B extends ViewDataBinding, VM extends MyActivityV
         return 0;
     }
 
-    public void showKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    protected VM getVM() {
+        return null;
     }
-
-    public void hideKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(Objects.requireNonNull(this.getCurrentFocus()).getWindowToken(), 0);
-        }
-    }
-
 }

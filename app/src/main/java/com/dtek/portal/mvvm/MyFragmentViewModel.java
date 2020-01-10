@@ -1,27 +1,28 @@
 package com.dtek.portal.mvvm;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.dtek.portal.api.IOnErrorListener;
-import com.stfalcon.androidmvvmhelper.mvvm.activities.ActivityViewModel;
+import com.stfalcon.androidmvvmhelper.mvvm.fragments.BindingFragment;
+import com.stfalcon.androidmvvmhelper.mvvm.fragments.FragmentViewModel;
 
 import static com.dtek.portal.mvvm.MyBindingActivity.ERROR_TOKEN_ACTION;
 
-public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityViewModel<A> implements IOnErrorListener {
+public class MyFragmentViewModel<F extends MyBindingFragment> extends FragmentViewModel<F> implements IOnErrorListener {
 
     protected MutableLiveData<String> data;
     private MutableLiveData<Throwable> errorData;
     private MutableLiveData<String> errorServiceData;
 
-    public MyActivityViewModel(A activity) {
-        super(activity);
+    public MyFragmentViewModel(F fragment) {
+        super(fragment);
     }
 
     protected IOnErrorListener getBaseListener(){
         return this;
     }
+
 
     public LiveData<String> getData() {
         data = new MutableLiveData<>();
@@ -57,4 +58,5 @@ public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityVi
     }
 
     public void updateView(){}
+
 }

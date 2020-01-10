@@ -41,6 +41,7 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         constServices = new ConstServices();
     }
 
+
     @Override
     public void onResume() {
         getServiceList();
@@ -67,12 +68,14 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         serviceSelected(ConstServices.NEWS_ID);
         disableAllCheckedBg();
         isNewsChecked.set(true);
+        hideAllNavigation();
     }
 
     public void onClickedMedia(){
         serviceSelected(ConstServices.MEDIA_ID);
         disableAllCheckedBg();
         isMediaChecked.set(true);
+        hideAllNavigation();
     }
 
     public void onClickServicesAdd() {
@@ -96,9 +99,13 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     }
 
     public void mBackGroundClicked() {
+        hideAllNavigation();
+        mBackground.set(false);
+    }
+
+    private void hideAllNavigation(){
         servicesNavigationHide();
         addServicesNavigationHide();
-        mBackground.set(false);
     }
 
     public void serviceSelected(int serviceID) {

@@ -29,10 +29,10 @@ public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainAct
         switchFragment(getSupportFragmentManager(), serviceID);
     }
 
-    @Override
-    public void setTitle(String title){
-        viewModel.setTitle(title);
-    }
+//    @Override
+//    public void setTitle(String title){
+//        viewModel.setTitle(title);
+//    }
 
     @Override
     public int getVariable() {

@@ -13,8 +13,8 @@ public class BasePagerAdapter  extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public BasePagerAdapter(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
+    public BasePagerAdapter(@NonNull FragmentManager fm) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     public void addFragment(Fragment fragment, String title) {
