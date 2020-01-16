@@ -1,25 +1,112 @@
 package com.dtek.portal.mvvm;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.dtek.portal.api.IOnErrorListener;
-import com.stfalcon.androidmvvmhelper.mvvm.activities.ActivityViewModel;
 
 import static com.dtek.portal.mvvm.MyBindingActivity.ERROR_TOKEN_ACTION;
 
-public class MyActivityViewModel<A extends AppCompatActivity> extends ActivityViewModel<A> implements IOnErrorListener {
+public class MyActivityViewModel<A extends AppCompatActivity> extends ViewModel implements IOnErrorListener {
 
     protected MutableLiveData<String> data;
     private MutableLiveData<Throwable> errorData;
     private MutableLiveData<String> errorServiceData;
 
+    protected A activity;
+
     public MyActivityViewModel(A activity) {
-        super(activity);
+        this.activity = activity;
     }
 
-    protected IOnErrorListener getBaseListener(){
+    public A getActivity() {
+        return activity;
+    }
+
+    public void finish() {
+        activity.finish();
+    }
+
+    /**
+     * Activity lifecycle
+     */
+    public boolean onBackKeyPress() {
+        return false;
+    }
+
+    public void onStart(){
+
+    }
+
+    public void onStop() {
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+    public void onDestroy() {
+        //realm.close();
+    }
+
+    public void onPause() {
+
+    }
+
+    public void onResume(){
+
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+    }
+
+    public void onPostCreate(Bundle savedInstanceState) {
+
+    }
+
+    public void onOptionsItemSelected(MenuItem item) {
+
+    }
+
+    public void onConfigurationChanged(Configuration newConfig) {
+
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    public void onSaveInstanceState(Bundle outState){
+
+    }
+
+    public void onCreateOptionsMenu(Menu menu) {
+
+    }
+
+    public void onPrepareOptionsMenu(Menu menu){
+
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus){
+
+    }
+
+    /**
+     * -----------------------
+     */
+
+    protected IOnErrorListener getOnErrorListener(){
         return this;
     }
 

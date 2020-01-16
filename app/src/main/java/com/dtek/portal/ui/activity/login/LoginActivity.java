@@ -19,9 +19,8 @@ import static com.dtek.portal.ui.activity.login.LoginActivityVM.VALIDATION_LOGIN
 public class LoginActivity extends MyBindingActivity<ActivityLoginBinding, LoginActivityVM> {
 
     @Override
-    protected LoginActivityVM getVM() {
-        viewModel = new LoginActivityVM(this);
-        return viewModel;
+    public LoginActivityVM onCreate() {
+        return new LoginActivityVM(this);
     }
 
     @Override

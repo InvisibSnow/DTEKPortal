@@ -35,30 +35,47 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
 
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-    implementation 'com.jakewharton.timber:timber:4.7.0'
+    //butterknife
+    def butterknife_version = "10.0.0"
+    implementation "com.jakewharton:butterknife:$butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
 
-    //mvvm helper
-    implementation 'com.github.stfalcon:androidmvvmhelper:0.4'
+//    implementation 'com.jakewharton.timber:timber:4.7.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    //retrofit
+    def retrofit_version = "2.5.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-rc03"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0-rc03"
+    //okhttp3
+    def okhttp3_version = "3.13.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+
+    //gson
+    def gson_version = "2.8.5"
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    //lifecycle
+    def lifecycle_version = "2.2.0-rc03"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     //SharedPref
-    implementation 'com.orhanobut:hawk:2.0.1'
+    def hawk_version = "2.0.1"
+    implementation "com.orhanobut:hawk:$hawk_version"
+
+    //paging
+    def paging_version = "1.0.1"
+    implementation "android.arch.paging:runtime:$paging_version"
 
 
 }

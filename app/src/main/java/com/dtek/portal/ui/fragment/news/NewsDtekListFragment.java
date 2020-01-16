@@ -1,22 +1,35 @@
 package com.dtek.portal.ui.fragment.news;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.dtek.portal.R;
+import com.dtek.portal.databinding.FragmentNewsDtekListBinding;
+import com.dtek.portal.mvvm.MyBindingFragment;
 
-
-public class NewsDtekListFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NewsDtekListFragment extends MyBindingFragment<NewsDtekListFragmentVM, FragmentNewsDtekListBinding> {
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_test, container, false);
-        return v;
+    protected NewsDtekListFragmentVM onCreateViewModel(FragmentNewsDtekListBinding binding) {
+        return new ViewModelProvider(this)
+                .get(NewsDtekListFragmentVM.class);
     }
 
+    public void refresh(){
+        viewModel.refresh();
+    }
+
+    @Override
+    public int getVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_news_dtek_list;
+    }
 }

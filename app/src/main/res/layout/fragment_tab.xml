@@ -3,11 +3,10 @@
 <layout>
 
     <data>
-
         <variable
             name="viewModel"
             type="com.dtek.portal.ui.fragment.base.BaseTabFragmentVM" />
-
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,13 +27,17 @@
             app:tabIndicatorHeight="3dp"
             app:tabMode="scrollable"
             app:tabTextAppearance="@style/MyTabLayoutText"
-            app:tabTextColor="@color/color_tab_text" />
+            app:tabTextColor="@color/color_tab_text"
+            app:setUpWithViewpager="@{viewPager}"
+            app:setTabListener="@{viewModel}"
+            />
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
-            viewPager="@{viewModel}"/>
+            app:viewPager="@{viewModel}"/>
 
     </LinearLayout>
 

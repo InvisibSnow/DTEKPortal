@@ -50,4 +50,7 @@
 
     <string name="text_not_availability_service_message">Сервіси не доступні</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

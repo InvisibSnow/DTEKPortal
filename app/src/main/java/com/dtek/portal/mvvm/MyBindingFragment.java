@@ -1,36 +1,71 @@
 package com.dtek.portal.mvvm;
 
-
-import android.content.Context;
 import android.content.Intent;
-import android.view.inputmethod.InputMethodManager;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
-import com.dtek.portal.ui.activity.login.LoginActivity;
+import com.dtek.portal.ui.activity.main.MainActivity;
 import com.dtek.portal.utils.ApiErrors;
-import com.dtek.portal.utils.PreferenceUtils;
-import com.stfalcon.androidmvvmhelper.mvvm.fragments.BindingFragment;
 
-import java.util.Objects;
-
-public class MyBindingFragment<VM extends MyFragmentViewModel, B extends ViewDataBinding> extends BindingFragment<VM, B> {
+public abstract class MyBindingFragment<VM extends MyFragmentViewModel, B extends ViewDataBinding> extends Fragment {
 
     public static final String ERROR_TOKEN_ACTION = "error_token";
-    public static final String SHOW_KEYBOARD_ACTION = "show_keyboard";
-    public static final String HIDE_KEYBOARD_ACTION = "hide_keyboard";
+    public static final String SHOW_DIALOG_ACTION = "dialog_show";
+    public static final String DISMISS_DIALOG_ACTION = "dialog_dismiss";
+    public static final String UPDATE_VIEW = "update_view";
 
+    protected abstract VM onCreateViewModel(B binding);
+
+    private B binding;
     protected VM viewModel;
 
+    private Bundle savedInstanceState;
+
     @Override
-    protected VM onCreateViewModel(B b) {
-        viewModel = getVM();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
+        viewModel = onCreateViewModel(binding);
+        binding.setVariable(getVariable(), viewModel);
+        binding.executePendingBindings();
+        viewModel.onViewCreated();
         initListener();
+    }
+
+    public B getBinding() {
+        return binding;
+    }
+
+    public VM getViewModel() {
         return viewModel;
     }
 
-    public void initListener() {
+    public Bundle getSavedInstanceState() {
+        return savedInstanceState;
+    }
+
+    public void resetViewModel() {
+        viewModel = onCreateViewModel(binding);
+        getBinding().setVariable(getVariable(), viewModel);
+    }
+
+    public void initListener(){
         LiveData<String> data = viewModel.getData();
         data.observe(this, this::action);
 
@@ -41,68 +76,125 @@ public class MyBindingFragment<VM extends MyFragmentViewModel, B extends ViewDat
         errorServiceData.observe(this, this::errorAction);
     }
 
-    private void action(String action) {
-        switch (action) {
+    private void action(String action){
+        switch (action){
             case ERROR_TOKEN_ACTION:
                 errorToken();
                 break;
-            case SHOW_KEYBOARD_ACTION:
-                showKeyBoard();
+            case SHOW_DIALOG_ACTION:
+                showWaitDialog();
                 break;
-            case HIDE_KEYBOARD_ACTION:
-                hideKeyBoard();
+            case DISMISS_DIALOG_ACTION:
+                dismissWaitDialog();
                 break;
+            case UPDATE_VIEW:
+                updateView();
         }
     }
 
-    public void errorToken() {
+    private void errorAction(Throwable throwable){
+        dismissWaitDialog();
+        ApiErrors.showError(throwable, getChildFragmentManager());
+    }
+
+    private void errorAction(String error){
+        dismissWaitDialog();
+        ApiErrors.showError(error, getChildFragmentManager());
+    }
+
+    public void errorToken(){
+        dismissWaitDialog();
         if(getActivity() != null) {
-            PreferenceUtils.saveToken("");
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            getActivity().finish();
+            ((MainActivity) getActivity()).errorToken();
         }
     }
 
-    private void errorAction(Throwable throwable) {
-        if (getActivity() != null) {
-            ApiErrors.showError(throwable, getActivity().getSupportFragmentManager());
-        }
+    public void updateView(){}
+
+    public void showWaitDialog(){}
+
+    public void dismissWaitDialog(){}
+
+    @Override
+    public void onStart() {
+        viewModel.onStart();
+        super.onStart();
     }
 
-    private void errorAction(String error) {
-        if (getActivity() != null) {
-            ApiErrors.showError(error, getActivity().getSupportFragmentManager());
-        }
+    @Override
+    public void onStop() {
+        viewModel.onStop();
+        super.onStop();
     }
 
-    public void showKeyBoard() {
-        if(getActivity() != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        }
+    @Override
+    public void onPause() {
+        viewModel.onPause();
+        super.onPause();
     }
 
-    public void hideKeyBoard() {
-        if(getActivity() != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.hideSoftInputFromWindow(Objects.requireNonNull(getActivity().getCurrentFocus()).getWindowToken(), 0);
-            }
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (viewModel != null) {
+            viewModel.onDestroy();
         }
     }
 
     @Override
-    public int getVariable() {
-        return 0;
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (viewModel != null) {
+            viewModel.onSaveInstanceState(outState);
+        }
     }
 
     @Override
-    public int getLayoutId() {
-        return 0;
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (viewModel != null) {
+            viewModel.onViewStateRestored(savedInstanceState);
+        }
     }
 
-    protected VM getVM() {
-        return null;
+    @Override
+    public void onDestroyView() {
+        viewModel.onDestroyView();
+        super.onDestroyView();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (viewModel == null) {
+            viewModel = onCreateViewModel(binding);
+        }
+        viewModel.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        viewModel.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    /**
+     * Override for set binding variable
+     *
+     * @return variable id
+     */
+    public abstract int getVariable();
+
+    /**
+     * Override for set layout resource
+     *
+     * @return layout resource id
+     */
+    public abstract int getLayoutId();
 }

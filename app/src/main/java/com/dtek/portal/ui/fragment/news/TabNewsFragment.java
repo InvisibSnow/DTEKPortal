@@ -9,9 +9,18 @@ import java.util.List;
 
 public class TabNewsFragment extends BaseTabFragment {
 
+    private NewsDtekListFragment newsDtekListFragment;
+    private NewsCompanyListFragment newsCompanyListFragment;
+    private NewsFavoritesListFragment newsFavoritesListFragment;
+
     @Override
     protected List<ViewPagerFragment> getViewPagerFragmentList() {
         List<ViewPagerFragment> vpFragmentList = new ArrayList<>();
+
+        newsDtekListFragment = new NewsDtekListFragment();
+        newsCompanyListFragment = new NewsCompanyListFragment();
+        newsFavoritesListFragment = new NewsFavoritesListFragment();
+
 
         vpFragmentList.add(new ViewPagerFragment(new NewsDtekListFragment(), getString(R.string.title_news_dtek)));
         vpFragmentList.add(new ViewPagerFragment(new NewsCompanyListFragment(), getString(R.string.title_news_company)));
@@ -19,26 +28,9 @@ public class TabNewsFragment extends BaseTabFragment {
         return vpFragmentList;
     }
 
-//    @Override
-//    protected void initFragments() {
-//    }
-//
-//    @Override
-//    protected void setupViewPager() {
-//       if(!isAdded()) return;
-//
-//        if (getActivity() != null) {
-//            ((MainActivity) getActivity()).setTitle(getString(R.string.title_news));
-//        }
-//
-//        BasePagerAdapter basePagerAdapter = new BasePagerAdapter(getChildFragmentManager(), 1);
-//        basePagerAdapter.addFragment(newsDtekListFragment, getString(R.string.title_news_dtek));
-////        basePagerAdapter.addFragment(newsCompanyListFragment, getString(R.string.title_news_company));
-////        basePagerAdapter.addFragment(newsFavoritesListFragment, getString(R.string.title_news_bookmark));
-//
-//        mViewPager.setOffscreenPageLimit(2);
-//        mViewPager.setAdapter(basePagerAdapter);
-//
-//        initTabLayout();
-//    }
+    @Override
+    public void updateView() {
+        newsDtekListFragment.refresh();
+        newsCompanyListFragment.refresh();
+    }
 }

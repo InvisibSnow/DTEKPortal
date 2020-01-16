@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+        <variable
+            name="item"
+            type="com.dtek.portal.models.news.News" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_news_list_margin"
+        android:layout_marginBottom="@dimen/item_news_list_margin"
+        android:background="@color/color_pic_transparent"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/PosterStyle"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/PosterTextStyle"
+            android:layout_width="match_parent"
+            android:maxLines="3"
+
+            app:layout_constraintBottom_toTopOf="@+id/tv_date"
+
+            android:text="@{item.title}"
+
+            tools:text="ДТЭК вошол в ТОП-10 лучших работодателей Украины" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/PosterTextStyle"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:text="@{item.publishedDate}"
+
+            tools:text="01.01.2020" />
+
+        <ToggleButton
+            style="@style/MyToggleButtonStyle"
+            android:layout_margin="@dimen/poster_inside_margin"
+            android:background="@drawable/book_mark_white_selector"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:toggleButton="@{item}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

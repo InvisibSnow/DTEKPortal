@@ -21,6 +21,10 @@
     <dimen name="login_activity_margin">@dimen/_16sdp</dimen>
     <dimen name="login_activity_margin_vertical">@dimen/_20sdp</dimen>
 
+    <dimen name="item_news_list_margin">@dimen/_10sdp</dimen>
+    <dimen name="poster_inside_margin">@dimen/_9sdp</dimen>
+    <dimen name="toggle_btn_size">@dimen/_30sdp</dimen>
+
 
 
 

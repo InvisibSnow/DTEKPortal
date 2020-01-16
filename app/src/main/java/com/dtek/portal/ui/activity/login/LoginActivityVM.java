@@ -44,8 +44,8 @@ public class LoginActivityVM extends MyActivityViewModel<LoginActivity>  {
     private MutableLiveData<String> loginData;
     private MutableLiveData<String> dialogData;
 
-    LoginActivityVM(LoginActivity activity) {
-        super(activity);
+    LoginActivityVM(LoginActivity loginActivity) {
+        super(loginActivity);
         iLoginRepo = new LoginRepo();
         inLogin = new InLogin();
         inLoginFAQ = new InLoginFAQ();
@@ -134,7 +134,7 @@ public class LoginActivityVM extends MyActivityViewModel<LoginActivity>  {
             } else {
                 progress.set(true);
                 String strLogin = login.trim().toLowerCase().replaceAll("@dtek.com", "");
-                iLoginRepo.getAuth(this, getBaseListener(), strLogin);
+                iLoginRepo.getAuth(this, getOnErrorListener(), strLogin);
                 hideKeyboard();
             }
         }
@@ -154,7 +154,7 @@ public class LoginActivityVM extends MyActivityViewModel<LoginActivity>  {
     class InLoginFAQ implements IOnFinishLoadListener<LoginFAQ> {
 
         void getLoginFAQ(){
-            iLoginRepo.getLoginFAQ(this, getBaseListener());
+            iLoginRepo.getLoginFAQ(this, getOnErrorListener());
         }
 
         @Override
@@ -168,7 +168,7 @@ public class LoginActivityVM extends MyActivityViewModel<LoginActivity>  {
 
         void sign(){
             progress.set(true);
-            iLoginRepo.sign(this, getBaseListener(), signCode);
+            iLoginRepo.sign(this, getOnErrorListener(), signCode);
             hideKeyboard();
         }
 

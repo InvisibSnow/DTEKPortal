@@ -18,4 +18,5 @@ public class ViewPagerFragment {
     public String getTitle() {
         return title;
     }
+
 }

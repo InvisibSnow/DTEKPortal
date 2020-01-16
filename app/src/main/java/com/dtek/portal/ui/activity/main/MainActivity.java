@@ -12,9 +12,8 @@ import static com.dtek.portal.utils.SwitchFragmentHelper.switchFragment;
 public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainActivityVM> {
 
     @Override
-    protected MainActivityVM getVM() {
-        viewModel = new MainActivityVM(this);
-        return viewModel;
+    public MainActivityVM onCreate() {
+        return new MainActivityVM(this);
     }
 
     @Override
@@ -28,11 +27,6 @@ public class MainActivity extends MyBindingActivity<ActivityMainBinding, MainAct
     private void changeFragment(Integer serviceID){
         switchFragment(getSupportFragmentManager(), serviceID);
     }
-
-//    @Override
-//    public void setTitle(String title){
-//        viewModel.setTitle(title);
-//    }
 
     @Override
     public int getVariable() {

@@ -35,8 +35,8 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     public final ObservableBoolean isMediaChecked = new ObservableBoolean();
     public final ObservableBoolean isServicesChecked = new ObservableBoolean();
 
-    public MainActivityVM(MainActivity activity) {
-        super(activity);
+    public MainActivityVM(MainActivity mainActivity) {
+        super(mainActivity);
         iServiceListRepo = new ServiceListRepo();
         constServices = new ConstServices();
     }
@@ -198,7 +198,7 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
 
     private void getServiceList() {
         if (serviceList.get() == null && !PreferenceUtils.getToken().isEmpty()) {
-            iServiceListRepo.getServiceList(this, getBaseListener());
+            iServiceListRepo.getServiceList(this, getOnErrorListener());
         }
     }
 
