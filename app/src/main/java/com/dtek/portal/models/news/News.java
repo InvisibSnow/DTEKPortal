@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.dtek.portal.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -180,6 +184,15 @@ public class News extends BaseObservable implements Parcelable {
                 Log.d("MyLOG"," Save News to db");
             }
         });
+    }
+
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .error(R.drawable.img_no_photo)
+                .centerCrop()
+                .into(view);
     }
 
     public static final DiffUtil.ItemCallback<News> CALLBACK = new DiffUtil.ItemCallback<News>() {

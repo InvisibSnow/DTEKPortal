@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:bind="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -16,20 +16,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/item_news_list_margin"
         android:layout_marginBottom="@dimen/item_news_list_margin"
-        android:background="@color/color_pic_transparent"
         android:orientation="vertical">
 
         <ImageView
             style="@style/PosterStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:profileImage="@{item.imageLink}"
+
+            tools:ignore="ContentDescription"
+            />
+
+        <ImageView
+            style="@style/PosterStyle"
+            android:background="@color/color_pic_transparent"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            />
 
         <TextView
             style="@style/PosterTextStyle"
             android:layout_width="match_parent"
+            android:layout_margin="@dimen/poster_inside_margin"
             android:maxLines="3"
 
             app:layout_constraintBottom_toTopOf="@+id/tv_date"
@@ -41,6 +54,7 @@
         <TextView
             android:id="@+id/tv_date"
             style="@style/PosterTextStyle"
+            android:layout_margin="@dimen/poster_inside_margin"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +62,16 @@
             android:text="@{item.publishedDate}"
 
             tools:text="01.01.2020" />
+
+
+        <include layout="@layout/item_likes_comment_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            bind:itemLikesComments="@{item}"
+            />
 
         <ToggleButton
             style="@style/MyToggleButtonStyle"

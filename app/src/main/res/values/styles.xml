@@ -97,7 +97,6 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/_12sdp</item>
-        <item name="android:layout_margin">@dimen/poster_inside_margin</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:fontFamily">@font/gotha_pro_reg</item>
     </style>
