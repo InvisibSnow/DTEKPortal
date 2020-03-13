@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.databinding.Observable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
 import com.dtek.portal.api.IOnErrorListener;
@@ -16,7 +20,7 @@ import static com.dtek.portal.mvvm.MyBindingFragment.SHOW_DIALOG_ACTION;
 import static com.dtek.portal.mvvm.MyBindingFragment.UPDATE_VIEW;
 
 public class MyFragmentViewModel<F extends MyBindingFragment>
-        extends ViewModel implements IOnErrorListener{
+        extends ViewModel implements IOnErrorListener, Observable, LifecycleObserver {
 
     private F fragment;
     private Activity activity;
@@ -24,6 +28,10 @@ public class MyFragmentViewModel<F extends MyBindingFragment>
     private MutableLiveData<String> data;
     private MutableLiveData<Throwable> errorData;
     private MutableLiveData<String> errorServiceData;
+
+    public MyFragmentViewModel() {
+        super();
+    }
 
     public MyFragmentViewModel(F fragment) {
         this.fragment = fragment;
@@ -41,32 +49,6 @@ public class MyFragmentViewModel<F extends MyBindingFragment>
     /**
      * Fragment lifecycle
      */
-    public void onViewCreated() {
-
-    }
-
-    public void onStart() {
-
-    }
-
-    public void onStop() {
-
-    }
-
-    public void onDestroy() {
-        //realm.close();
-    }
-
-    public void onPause() {
-
-    }
-
-    public void onResume() {
-
-    }
-
-    public void onDestroyView() {
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
@@ -100,30 +82,41 @@ public class MyFragmentViewModel<F extends MyBindingFragment>
         return errorServiceData;
     }
 
-    public void dismissWaitDialog(){
-        data.postValue(DISMISS_DIALOG_ACTION);
-    }
-
-    public void showWaitDialog(){
-        data.postValue(SHOW_DIALOG_ACTION);
-    }
-
     public void updateView(){
+        if(data != null)
         data.postValue(UPDATE_VIEW);
     }
 
     @Override
     public void onFailure(String error) {
+        stopLoading();
         errorServiceData.postValue(error);
     }
 
     @Override
     public void onFailure(Throwable throwable) {
+        stopLoading();
         errorData.postValue(throwable);
     }
 
     @Override
     public void errorToken() {
         data.postValue(ERROR_TOKEN_ACTION);
+    }
+
+    @Override
+    public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
+    }
+
+    @Override
+    public void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
+    }
+
+    public void stopLoading(){}
+
+    @Override
+    protected void onCleared() {
+        //close db
+        //close connection
     }
 }

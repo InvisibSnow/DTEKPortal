@@ -8,6 +8,15 @@ public class Const {
         public static final String API_AUTH_ACCESS = BASE_AUTH + "checkaccess/";
     }
 
+    public static final class News {
+        public static final String API_NEWS = "news/api/news/";
+        public static final String NEWS_CAT_DTEK = "/12/dtek";
+        public static final String NEWS_CAT_COMPANY = "/12/enterprises";
+        public static final String NEWS_PARAM_IMAGE = "&maxwidth=320&maxheight=160";
+        public static final String NEWS_BASE64 = "News/Api/NewsImage/?link=";
+        public static final String NEWS_LIKE = "Likes/";
+    }
+
     public static final class Login{
         public static final String BASE_AUTH = "authorization/auth.svc/";
         public static final String API_AUTH_SMS = BASE_AUTH + "getsms/";

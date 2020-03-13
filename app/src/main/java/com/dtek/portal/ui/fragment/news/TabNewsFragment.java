@@ -21,10 +21,12 @@ public class TabNewsFragment extends BaseTabFragment {
         newsCompanyListFragment = new NewsCompanyListFragment();
         newsFavoritesListFragment = new NewsFavoritesListFragment();
 
+        vpFragmentList.add(new ViewPagerFragment(newsDtekListFragment, getString(R.string.title_news_dtek)));
+        vpFragmentList.add(new ViewPagerFragment(newsCompanyListFragment, getString(R.string.title_news_company)));
+        vpFragmentList.add(new ViewPagerFragment(newsFavoritesListFragment, getString(R.string.title_news_bookmark)));
 
-        vpFragmentList.add(new ViewPagerFragment(new NewsDtekListFragment(), getString(R.string.title_news_dtek)));
-        vpFragmentList.add(new ViewPagerFragment(new NewsCompanyListFragment(), getString(R.string.title_news_company)));
-        vpFragmentList.add(new ViewPagerFragment(new NewsFavoritesListFragment(), getString(R.string.title_news_bookmark)));
+        setTitle(getString(R.string.title_news));
+
         return vpFragmentList;
     }
 

@@ -35,6 +35,7 @@ public class BaseTabFragmentVM extends MyFragmentViewModel {
         for(ViewPagerFragment vpFragment: viewModel.fragmentList){
             pagerAdapter.addFragment(vpFragment.getFragment(), vpFragment.getTitle());
         }
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(pagerAdapter);
     }
 

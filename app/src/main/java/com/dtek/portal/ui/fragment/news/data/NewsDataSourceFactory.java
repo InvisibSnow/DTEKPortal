@@ -12,21 +12,33 @@ public class NewsDataSourceFactory extends DataSource.Factory {
 
     private NewsDtekListFragmentVM newsDtekListFragmentVM;
     private IOnErrorListener iOnErrorListener;
+    private String newsCategory;
 
-    public NewsDataSourceFactory(NewsDtekListFragmentVM newsDtekListFragmentVM, IOnErrorListener iOnErrorListener){
+    private NewsListRepo newsListRepo;
+
+    public NewsDataSourceFactory(NewsDtekListFragmentVM newsDtekListFragmentVM, IOnErrorListener iOnErrorListener, String newsCategory){
         this.newsDtekListFragmentVM = newsDtekListFragmentVM;
         this.iOnErrorListener = iOnErrorListener;
+        this.newsCategory = newsCategory;
         mutableLiveData = new MutableLiveData<>();
     }
 
     @Override
     public DataSource create() {
-        NewsListRepo newsListRepo = new NewsListRepo(newsDtekListFragmentVM, iOnErrorListener);
+        newsListRepo = new NewsListRepo(newsDtekListFragmentVM, iOnErrorListener, newsCategory);
         mutableLiveData.postValue(newsListRepo);
         return newsListRepo;
     }
 
     public MutableLiveData<NewsListRepo> getMutableLiveData() {
         return mutableLiveData;
+    }
+
+    public NewsListRepo getNewsListRepo() {
+        return newsListRepo;
+    }
+
+    public void invalidate(){
+        newsListRepo.invalidate();
     }
 }

@@ -44,7 +44,7 @@ public abstract class MyBindingFragment<VM extends MyFragmentViewModel, B extend
         viewModel = onCreateViewModel(binding);
         binding.setVariable(getVariable(), viewModel);
         binding.executePendingBindings();
-        viewModel.onViewCreated();
+        getLifecycle().addObserver(viewModel);
         initListener();
     }
 
@@ -116,38 +116,6 @@ public abstract class MyBindingFragment<VM extends MyFragmentViewModel, B extend
     public void dismissWaitDialog(){}
 
     @Override
-    public void onStart() {
-        viewModel.onStart();
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        viewModel.onStop();
-        super.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        viewModel.onPause();
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (viewModel != null) {
-            viewModel.onDestroy();
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (viewModel != null) {
@@ -161,12 +129,6 @@ public abstract class MyBindingFragment<VM extends MyFragmentViewModel, B extend
         if (viewModel != null) {
             viewModel.onViewStateRestored(savedInstanceState);
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        viewModel.onDestroyView();
-        super.onDestroyView();
     }
 
     @Override

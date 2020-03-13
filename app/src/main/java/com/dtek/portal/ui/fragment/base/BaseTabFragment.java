@@ -22,6 +22,12 @@ public class BaseTabFragment extends MyBindingFragment<BaseTabFragmentVM, Fragme
         return null;
     }
 
+    public void setTitle(String title){
+        if(getActivity() != null) {
+            getActivity().setTitle(title);
+        }
+    }
+
     @Override
     public int getVariable() {
         return BR.viewModel;

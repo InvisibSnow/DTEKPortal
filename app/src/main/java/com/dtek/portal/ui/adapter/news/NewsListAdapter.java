@@ -26,7 +26,7 @@ public class NewsListAdapter extends PagedListAdapter<News, NewsListAdapter.News
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         LayoutInflater inflater=LayoutInflater.from(viewGroup.getContext());
-        ViewDataBinding binding= DataBindingUtil.inflate(inflater, R.layout.item_news_dtek_list, viewGroup,false);
+        ViewDataBinding binding= DataBindingUtil.inflate(inflater, getLayoutId(), viewGroup,false);
 
         final NewsListAdapter.NewsViewHolder holder = new NewsListAdapter.NewsViewHolder(binding);
 //        holder.itemView.setOnClickListener(view -> ProfileActivity.open(viewGroup.getContext(), getItem(holder.getAdapterPosition())));
@@ -38,6 +38,9 @@ public class NewsListAdapter extends PagedListAdapter<News, NewsListAdapter.News
         holder.bind(Objects.requireNonNull(getItem(position)));
     }
 
+    public int getLayoutId(){
+        return R.layout.item_news_dtek_list;
+    }
 
     class NewsViewHolder extends RecyclerView.ViewHolder {
 

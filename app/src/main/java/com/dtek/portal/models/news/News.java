@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
@@ -14,10 +13,13 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.dtek.portal.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import static com.dtek.portal.utils.Const.HTTP.API_BASE_URL;
+import static com.dtek.portal.utils.Const.News.NEWS_BASE64;
+import static com.dtek.portal.utils.Const.News.NEWS_PARAM_IMAGE;
 
 public class News extends BaseObservable implements Parcelable {
 
@@ -179,9 +181,9 @@ public class News extends BaseObservable implements Parcelable {
     public static void bindToggleButton(ToggleButton toggleButton, News news){
         toggleButton.setOnClickListener(v -> {
             if(toggleButton.isChecked()){
-                Log.d("MyLOG"," Delete News from db");
-            } else {
                 Log.d("MyLOG"," Save News to db");
+            } else {
+                Log.d("MyLOG"," Delete News from db");
             }
         });
     }
@@ -189,7 +191,8 @@ public class News extends BaseObservable implements Parcelable {
     @BindingAdapter("profileImage")
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
-                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .asBitmap()
+                .load(API_BASE_URL + NEWS_BASE64 + imageUrl + NEWS_PARAM_IMAGE)
                 .error(R.drawable.img_no_photo)
                 .centerCrop()
                 .into(view);

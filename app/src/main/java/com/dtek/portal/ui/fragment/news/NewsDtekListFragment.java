@@ -7,20 +7,37 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dtek.portal.R;
 import com.dtek.portal.databinding.FragmentNewsDtekListBinding;
 import com.dtek.portal.mvvm.MyBindingFragment;
+import com.dtek.portal.ui.adapter.news.NewsListAdapter;
+
+import static com.dtek.portal.utils.Const.News.NEWS_CAT_DTEK;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NewsDtekListFragment extends MyBindingFragment<NewsDtekListFragmentVM, FragmentNewsDtekListBinding> {
 
+    private NewsDtekListFragmentVM myViewModel;
+
     @Override
     protected NewsDtekListFragmentVM onCreateViewModel(FragmentNewsDtekListBinding binding) {
-        return new ViewModelProvider(this)
+        myViewModel = new ViewModelProvider(this, new NewsDtekListModelFactory(this, getNewsListAdapter(), getNewsCategory()))
                 .get(NewsDtekListFragmentVM.class);
+        myViewModel.refresh();
+        return myViewModel;
     }
 
-    public void refresh(){
-        viewModel.refresh();
+    public NewsListAdapter getNewsListAdapter() {
+        return new NewsListAdapter();
+    }
+
+    public String getNewsCategory(){
+        return NEWS_CAT_DTEK;
+    }
+
+    public void refresh() {
+        if (myViewModel != null) {
+            getViewModel().refresh();
+        }
     }
 
     @Override

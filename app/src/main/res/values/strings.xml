@@ -48,6 +48,9 @@
     <string name="title_add_references">Створити заявку на довідку</string>
     <string name="title_add_doc">Створити документ</string>
 
+    <!--HR - відпустки-->
+    <string name="tab_title_limit">Ліміти відпусток</string>
+
     <string name="text_not_availability_service_message">Сервіси не доступні</string>
 
     <!-- TODO: Remove or change this placeholder text -->

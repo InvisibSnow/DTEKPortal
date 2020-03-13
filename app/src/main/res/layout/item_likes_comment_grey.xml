@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+        <variable
+            name="itemLikesComments"
+            type="com.dtek.portal.models.news.News" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        tools:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/tv_comment_count"
+            style="@style/PosterTextStyleGrey"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:text="@{String.valueOf(itemLikesComments.numComments)}"
+
+            tools:text="8" />
+
+        <ImageView
+            android:id="@+id/iv_comment_count"
+            android:layout_width="@dimen/poster_mini_icon_size"
+            android:layout_height="@dimen/poster_mini_icon_size"
+            android:layout_marginEnd="@dimen/_3sdp"
+
+
+            android:background="@drawable/ic_comment_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comment_count"
+            app:layout_constraintEnd_toStartOf="@+id/tv_comment_count"
+
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_likes_count"
+            style="@style/PosterTextStyleGrey"
+            android:layout_marginEnd="@dimen/poster_inside_margin"
+
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comment_count"
+            app:layout_constraintEnd_toStartOf="@+id/iv_comment_count"
+
+            android:text="@{String.valueOf(itemLikesComments.likesCount)}"
+            tools:text="8" />
+
+        <ImageView
+            android:layout_width="@dimen/poster_mini_icon_size"
+            android:layout_height="@dimen/poster_mini_icon_size"
+            android:layout_marginEnd="@dimen/_3sdp"
+
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@drawable/ic_like_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_likes_count"
+            app:layout_constraintEnd_toStartOf="@+id/tv_likes_count"
+
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

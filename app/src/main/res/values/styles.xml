@@ -101,6 +101,10 @@
         <item name="android:fontFamily">@font/gotha_pro_reg</item>
     </style>
 
+    <style name="PosterTextStyleGrey" parent="PosterTextStyle" >
+        <item name="android:textColor">@color/color_poster_grey</item>
+    </style>
+
     <style name="MyToggleButtonStyle" >
         <item name="android:layout_width">@dimen/toggle_btn_size</item>
         <item name="android:layout_height">@dimen/toggle_btn_size</item>

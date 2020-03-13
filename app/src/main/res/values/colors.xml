@@ -15,6 +15,7 @@
     <color name="color_tab_text">#131313</color>
     <color name="color_pic_transparent">#63000000</color>
     <color name="color_poster_grey">#6D6C6C</color>
+    <color name="color_company_poster_text_grey">#353535</color>
     <color name="color_title">#333333</color>
     <color name="color_progress_bar">#FEDF04</color>
     <color name="color_comment_layout">#F1F1F1</color>

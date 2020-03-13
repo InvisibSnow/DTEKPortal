@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,7 +16,7 @@ import com.dtek.portal.api.IOnErrorListener;
 
 import static com.dtek.portal.mvvm.MyBindingActivity.ERROR_TOKEN_ACTION;
 
-public class MyActivityViewModel<A extends AppCompatActivity> extends ViewModel implements IOnErrorListener {
+public class MyActivityViewModel<A extends AppCompatActivity> extends ViewModel implements IOnErrorListener, LifecycleObserver {
 
     protected MutableLiveData<String> data;
     private MutableLiveData<Throwable> errorData;
@@ -27,12 +28,11 @@ public class MyActivityViewModel<A extends AppCompatActivity> extends ViewModel 
         this.activity = activity;
     }
 
-    public A getActivity() {
-        return activity;
+    public MyActivityViewModel() {
     }
 
-    public void finish() {
-        activity.finish();
+    public A getActivity() {
+        return activity;
     }
 
     /**
@@ -42,27 +42,7 @@ public class MyActivityViewModel<A extends AppCompatActivity> extends ViewModel 
         return false;
     }
 
-    public void onStart(){
-
-    }
-
-    public void onStop() {
-
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
-    public void onDestroy() {
-        //realm.close();
-    }
-
-    public void onPause() {
-
-    }
-
-    public void onResume(){
 
     }
 

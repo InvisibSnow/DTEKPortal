@@ -1,5 +1,7 @@
 package com.dtek.portal.ui.adapter;
 
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,4 +39,8 @@ public class BasePagerAdapter  extends FragmentStatePagerAdapter {
         return mFragmentList.size();
     }
 
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
 }

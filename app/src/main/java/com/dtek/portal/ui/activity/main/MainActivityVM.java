@@ -1,5 +1,7 @@
 package com.dtek.portal.ui.activity.main;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -7,8 +9,10 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.dtek.portal.R;
 import com.dtek.portal.api.IOnFinishLoadListener;
@@ -35,22 +39,39 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
     public final ObservableBoolean isMediaChecked = new ObservableBoolean();
     public final ObservableBoolean isServicesChecked = new ObservableBoolean();
 
-    public MainActivityVM(MainActivity mainActivity) {
-        super(mainActivity);
+    public final ObservableBoolean firstTime = new ObservableBoolean(true);
+
+    public void setAction(){
+        firstTime.set(false);
+    }
+
+    public MainActivityVM() {
         iServiceListRepo = new ServiceListRepo();
         constServices = new ConstServices();
     }
 
-
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         getServiceList();
         initCurrentFragment();
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        iServiceListRepo.cancelAllRequest();
+    }
+
     private void initCurrentFragment() {
         if (serviceData.getValue() == null) {
-            serviceSelected(ConstServices.NEWS_ID);
+//            serviceSelected(ConstServices.NEWS_ID); //todo return after testing
+            serviceSelected(ConstServices.HR_SERVICE_ID);
+
             isNewsChecked.set(true);
         }
     }
@@ -64,14 +85,14 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         }
     }
 
-    public void onClickedNews(){
+    public void onClickedNews() {
         serviceSelected(ConstServices.NEWS_ID);
         disableAllCheckedBg();
         isNewsChecked.set(true);
         hideAllNavigation();
     }
 
-    public void onClickedMedia(){
+    public void onClickedMedia() {
         serviceSelected(ConstServices.MEDIA_ID);
         disableAllCheckedBg();
         isMediaChecked.set(true);
@@ -103,17 +124,20 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
         mBackground.set(false);
     }
 
-    private void hideAllNavigation(){
+    private void hideAllNavigation() {
         servicesNavigationHide();
         addServicesNavigationHide();
     }
 
     public void serviceSelected(int serviceID) {
+        Log.d("MyLOG", "PostValue ");
         if (serviceData.getValue() != null) {
             if (serviceData.getValue() != serviceID) {
+                Log.d("MyLOG", "serviceData.postValue ");
                 serviceData.postValue(serviceID);
             }
         } else {
+            Log.d("MyLOG", "serviceData.postValue: " + serviceID);
             serviceData.postValue(serviceID);
         }
     }
@@ -164,24 +188,24 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
 
     @BindingAdapter("myColorAttr")
     public static void bindColorAttr(View view, boolean value) {
-        if(PreferenceUtils.getToken().equals("")){
+        if (PreferenceUtils.getToken().equals("")) {
             view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_grey_bg));
-        } else if (value){
+        } else if (value) {
             view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_current_choose_item));
         } else {
             view.setBackgroundColor(view.getContext().getResources().getColor(R.color.color_light_blue_bg));
         }
     }
 
-    private void disableAllCheckedBg(){
+    private void disableAllCheckedBg() {
         isNewsChecked.set(false);
         isMediaChecked.set(false);
         isServicesChecked.set(false);
     }
 
-    private void setCurrentChecked(){
+    private void setCurrentChecked() {
         disableAllCheckedBg();
-        if(serviceData.getValue() != null) {
+        if (serviceData.getValue() != null) {
             if (serviceData.getValue() == ConstServices.NEWS_ID) {
                 isNewsChecked.set(true);
             } else if (serviceData.getValue() == ConstServices.MEDIA_ID) {
@@ -198,12 +222,16 @@ public class MainActivityVM extends MyActivityViewModel<MainActivity> implements
 
     private void getServiceList() {
         if (serviceList.get() == null && !PreferenceUtils.getToken().isEmpty()) {
+            Log.d("MyLOG", "serviceList.get()");
             iServiceListRepo.getServiceList(this, getOnErrorListener());
         }
     }
 
     public LiveData<Integer> getServiceData() {
-        serviceData = new MutableLiveData<>();
-        return serviceData;
+        if (serviceData == null) {
+            return serviceData = new MutableLiveData<>();
+        } else {
+            return serviceData;
+        }
     }
 }

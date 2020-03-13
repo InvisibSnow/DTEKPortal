@@ -45,6 +45,7 @@ public abstract class MyBindingActivity<B extends ViewDataBinding, VM extends My
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         this.viewModel = viewModel == null ? onCreate() : viewModel;
         binding.setVariable(getVariable(), viewModel);
+        getLifecycle().addObserver(viewModel);
         binding.executePendingBindings();
     }
 
@@ -59,33 +60,9 @@ public abstract class MyBindingActivity<B extends ViewDataBinding, VM extends My
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        viewModel.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        viewModel.onStop();
-        super.onStop();
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         viewModel.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onPause() {
-        viewModel.onPause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.onResume();
     }
 
     @Override
@@ -93,13 +70,6 @@ public abstract class MyBindingActivity<B extends ViewDataBinding, VM extends My
         if (!viewModel.onBackKeyPress()) {
             super.onBackPressed();
         }
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
     }
 
     @Override
